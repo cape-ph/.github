@@ -1,0 +1,49 @@
+name: Python Checks
+
+on:
+    workflow_call:
+        inputs:
+            python_version:
+                description: "Python version to use"
+                default: "3.11"
+                required: false
+                type: string
+
+jobs:
+    lsp:
+        name: Types (pyright)
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-python@v5
+              id: setup_python
+              with:
+                  python-version: ${{ inputs.python_version }}
+            - name: venv cache
+              uses: actions/cache@v4
+              with:
+                  key: venv-${{ runner.os }}-${{ steps.setup_python.outputs.python-version }}-${{ hashFiles('requirements.txt') }}
+                  path: venv
+            - name: install dependencies
+              run: |
+                  python -m venv venv
+                  source venv/bin/activate
+                  python -m pip install -r requirements.txt
+                  echo "${VIRTUAL_ENV}/bin" >> $GITHUB_PATH
+                  echo "VIRTUAL_ENV=${VIRTUAL_ENV}" >> $GITHUB_ENV
+            - name: run pyright
+              uses: jakebailey/pyright-action@v2
+              with:
+                  python-version: ${{ steps.setup_python.outputs.python-version }}
+    black:
+        name: Formatting (black)
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: psf/black@stable
+    isort:
+        name: Formatting (isort)
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: isort/isort-action@v1
