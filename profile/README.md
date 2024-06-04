@@ -1,6 +1,6 @@
 <div align="center" id="madewithlua">
   <img
-    src="../logo.png"
+    src="https://raw.githubusercontent.com/cape-ph/.github/main/logo.png"
     width="200"
     ,
     height="200"
