@@ -8,6 +8,11 @@ on:
                 default: "3.11"
                 required: false
                 type: string
+            pytest:
+                description: "Enable pytest testing"
+                default: true
+                required: false
+                type: boolean
 
 jobs:
     lsp:
@@ -47,3 +52,32 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - uses: isort/isort-action@v1
+    test:
+        name: Tests (pytest)
+        if: ${{ inputs.pytest }}
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-python@v5
+              id: setup_python
+              with:
+                  python-version: ${{ inputs.python_version }}
+            - name: venv cache
+              uses: actions/cache@v4
+              with:
+                  key: venv-${{ runner.os }}-${{ steps.setup_python.outputs.python-version }}-${{ hashFiles('requirements.txt') }}
+                  path: venv
+            - name: install dependencies
+              run: |
+                  python -m venv venv
+                  source venv/bin/activate
+                  python -m pip install -r requirements.txt
+                  echo "${VIRTUAL_ENV}/bin" >> $GITHUB_PATH
+                  echo "VIRTUAL_ENV=${VIRTUAL_ENV}" >> $GITHUB_ENV
+            - name: run tests
+              run: pytest --junitxml=junit/test-results-${{ steps.setup_python.outputs.python-version }}.xml
+            - name: upload pytest results
+              uses: actions/upload-artifact@v4
+              with:
+                  name: pytest-results-${{ steps.setup_python.outputs.python-version }}
+                  path: junit/test-results-${{ steps.setup_python.outputs.python-version }}.xml
