@@ -54,6 +54,8 @@ jobs:
             - uses: isort/isort-action@v1
     test:
         name: Tests (pytest)
+        needs:
+            - lsp
         if: ${{ inputs.pytest }}
         runs-on: ubuntu-latest
         steps:
