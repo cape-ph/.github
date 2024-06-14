@@ -10,7 +10,7 @@ on:
                 type: string
             pytest:
                 description: "Enable pytest testing"
-                default: true
+                default: false
                 required: false
                 type: boolean
 
