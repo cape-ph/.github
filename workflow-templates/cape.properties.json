@@ -1,0 +1,7 @@
+{
+    "name": "CAPE CI/CD",
+    "description": "Adds Python checking (linter, formatter, tests) and typo checks",
+    "iconName": "octicon workflow",
+    "categories": ["Python", "python3"],
+    "filePatterns": ["^pyproject.toml", "requirements.txt"]
+}

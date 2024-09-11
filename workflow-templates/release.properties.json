@@ -1,0 +1,5 @@
+{
+    "name": "CAPE Release Workflow",
+    "description": "Adds release workflow for tagging date based releases (YYYY.MM.DD.<rev>)",
+    "iconName": "octicon tag"
+}
