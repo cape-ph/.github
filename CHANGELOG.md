@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/cape-ph/.github/compare/v1.0.0...v1.0.1) (2024-09-18)
+
+
+### Bug Fixes
+
+* **semantic_release:** remove incorrect use of `package-name` parameter in `release-please` ([#5](https://github.com/cape-ph/.github/issues/5)) ([169b4e0](https://github.com/cape-ph/.github/commit/169b4e0ffec225cb59ceafaa1d263be25f4486c0))
+
 ## 1.0.0 (2024-09-18)
 
 
