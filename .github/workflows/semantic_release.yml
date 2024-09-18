@@ -1,0 +1,76 @@
+name: Semantic Versioning Release
+
+# SHOULD ONLY BE CALLED ON PUSH TO DEFAULT BRANCH AND PULL REQUEST TARGET
+on:
+    workflow_call:
+        inputs:
+            # true if push to production branch, false if a PR
+            is_production:
+                description: "Whether or not to perform production tasks"
+                default: false
+                required: false
+                type: boolean
+            name:
+                description: "Name of the package"
+                required: true
+                type: string
+
+jobs:
+    conventional_commit:
+        name: Conventional Commit PR Title
+        if: ${{ !inputs.is_production }}
+        runs-on: ubuntu-latest
+        steps:
+            - uses: amannn/action-semantic-pull-request@v5
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  types: |
+                      build
+                      chore
+                      ci
+                      docs
+                      feat
+                      fix
+                      merge
+                      perf
+                      refactor
+                      revert
+                      style
+                      test
+                      wip
+                  ignoreLabels: |
+                      autorelease: pending
+    release:
+        name: Release Please
+        if: ${{ inputs.is_production }}
+        runs-on: ubuntu-latest
+        steps:
+            - uses: google-github-actions/release-please-action@v4
+              id: release
+              with:
+                  token: ${{ secrets.GITHUB_TOKEN }}
+                  release-type: simple
+                  package-name: ${{ inputs.name }}
+            - uses: actions/checkout@v4
+            - uses: rickstaa/action-create-tag@v1
+              if: ${{ steps.release.outputs.release_created }}
+              with:
+                  tag: latest
+                  message: "Latest stable release: ${{ steps.release.outputs.tag_name }}"
+                  tag_exists_error: false
+                  force_push_tag: true
+            - uses: rickstaa/action-create-tag@v1
+              if: ${{ steps.release.outputs.release_created }}
+              with:
+                  tag: "v${{ steps.release.outputs.major }}"
+                  message: "Current v${{ steps.release.outputs.major }} release: ${{ steps.release.outputs.tag_name }}"
+                  tag_exists_error: false
+                  force_push_tag: true
+            - uses: rickstaa/action-create-tag@v1
+              if: ${{ steps.release.outputs.release_created }}
+              with:
+                  tag: "v${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}"
+                  message: "Current v${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }} release: ${{ steps.release.outputs.tag_name }}"
+                  tag_exists_error: false
+                  force_push_tag: true
