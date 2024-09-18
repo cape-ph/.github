@@ -1,0 +1,5 @@
+{
+    "name": "CAPE Semantic Release Workflow",
+    "description": "Adds release workflow for tagging semantic versioning based releases (MAJOR.MINOR.PATCH) and requires Pull Requests match Conventional Commit Standards",
+    "iconName": "octicon tag"
+}
