@@ -10,10 +10,6 @@ on:
                 default: false
                 required: false
                 type: boolean
-            name:
-                description: "Name of the package"
-                required: true
-                type: string
 
 jobs:
     conventional_commit:
@@ -46,12 +42,11 @@ jobs:
         if: ${{ inputs.is_production }}
         runs-on: ubuntu-latest
         steps:
-            - uses: google-github-actions/release-please-action@v4
+            - uses: googleapis/release-please-action@v4
               id: release
               with:
                   token: ${{ secrets.GITHUB_TOKEN }}
                   release-type: simple
-                  package-name: ${{ inputs.name }}
             - uses: actions/checkout@v4
             - uses: rickstaa/action-create-tag@v1
               if: ${{ steps.release.outputs.release_created }}
