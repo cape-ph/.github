@@ -14,5 +14,4 @@ jobs:
         uses: cape-ph/.github/.github/workflows/semantic_release.yml@main
         secrets: inherit
         with:
-            name: "CAPE Org Utilities"
             is_production: ${{ github.event_name == 'push' }}
