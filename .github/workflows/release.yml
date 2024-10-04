@@ -2,6 +2,16 @@ name: Release
 
 on:
     workflow_call:
+        inputs:
+            release:
+                description: "Whether to publish a release from the created release tag"
+                default: true
+                required: false
+                type: boolean
+        outputs:
+            tag:
+                description: "The first output string"
+                value: ${{ jobs.tag.outputs.tag }}
 
 jobs:
     tag:
@@ -83,6 +93,7 @@ jobs:
 
     release:
         name: Create Release
+        if: ${{ inputs.release }}
         needs: tag
         runs-on: ubuntu-latest
         steps:
