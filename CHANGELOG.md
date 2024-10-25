@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.2](https://github.com/cape-ph/.github/compare/v1.0.1...v1.0.2) (2024-10-25)
+
+
+### Bug Fixes
+
+* **python_checks:** improve python caching ([188e187](https://github.com/cape-ph/.github/commit/188e187ab25f959a7f353d33bfa29e730581e349))
+* **python_checks:** improve python caching ([#9](https://github.com/cape-ph/.github/issues/9)) ([a30e7b9](https://github.com/cape-ph/.github/commit/a30e7b99a7b77fe89f50394a0d40d4d1b47e0bf6))
+
 ## [1.0.1](https://github.com/cape-ph/.github/compare/v1.0.0...v1.0.1) (2024-09-18)
 
 
