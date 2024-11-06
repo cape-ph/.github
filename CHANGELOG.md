@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/cape-ph/.github/compare/v1.0.2...v1.0.3) (2024-11-06)
+
+
+### Bug Fixes
+
+* **python_checks:** incorrect python version specified ([ccf79ca](https://github.com/cape-ph/.github/commit/ccf79ca6e0c20011e9ca29714377bb21f196741e))
+
 ## [1.0.2](https://github.com/cape-ph/.github/compare/v1.0.1...v1.0.2) (2024-10-25)
 
 
