@@ -10,6 +10,11 @@ on:
                 default: false
                 required: false
                 type: boolean
+            release-type:
+                description: "The type of release strategy to do for release-please"
+                default: simple
+                required: false
+                type: string
 
 jobs:
     conventional_commit:
@@ -46,7 +51,7 @@ jobs:
               id: release
               with:
                   token: ${{ secrets.GITHUB_TOKEN }}
-                  release-type: simple
+                  release-type: ${{ inputs.release-type }}
             - uses: actions/checkout@v4
             - uses: rickstaa/action-create-tag@v1
               if: ${{ steps.release.outputs.release_created }}
