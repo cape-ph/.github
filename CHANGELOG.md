@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/cape-ph/.github/compare/v1.0.3...v1.1.0) (2024-11-08)
+
+
+### Features
+
+* **semantic_release:** allow specifying `release-type` to `release-please` ([43102ad](https://github.com/cape-ph/.github/commit/43102ad1845728f5f3f3ae18ca74f8f0d384b7f3))
+
 ## [1.0.3](https://github.com/cape-ph/.github/compare/v1.0.2...v1.0.3) (2024-11-06)
 
 
