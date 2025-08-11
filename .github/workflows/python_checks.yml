@@ -19,7 +19,7 @@ jobs:
         name: Types (pyright)
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v5
             - uses: actions/setup-python@v5
               id: setup_python
               with:
@@ -36,13 +36,13 @@ jobs:
         name: Formatting (black)
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v5
             - uses: psf/black@stable
     isort:
         name: Formatting (isort)
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v5
             - uses: isort/isort-action@v1
     test:
         name: Tests (pytest)
@@ -51,7 +51,7 @@ jobs:
         if: ${{ inputs.pytest }}
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v5
             - uses: actions/setup-python@v5
               id: setup_python
               with:
