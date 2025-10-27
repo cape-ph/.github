@@ -63,7 +63,7 @@ jobs:
             - name: run tests
               run: pytest --junitxml=junit/test-results-${{ steps.setup_python.outputs.python-version }}.xml
             - name: upload pytest results
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v5
               with:
                   name: pytest-results-${{ steps.setup_python.outputs.python-version }}
                   path: junit/test-results-${{ steps.setup_python.outputs.python-version }}.xml
