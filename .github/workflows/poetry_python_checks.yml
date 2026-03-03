@@ -24,30 +24,30 @@ jobs:
         name: Types (pyright)
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
             - run: pipx install poetry
-            - uses: actions/setup-python@v5
+            - uses: actions/setup-python@v6
               id: setup_python
               with:
                   python-version: ${{ inputs.python_version }}
                   cache: "poetry"
             - run: poetry install
-            - run: echo "$(poetry env info --path)/bin" >> $GITHUB_PATH
+            - run: echo "$(poetry env info --path)/bin" >>$GITHUB_PATH
             - name: run pyright
-              uses: jakebailey/pyright-action@v2
+              uses: jakebailey/pyright-action@v3
               with:
                   python-version: ${{ steps.setup_python.outputs.python-version }}
     black:
         name: Formatting (black)
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
             - uses: psf/black@stable
     isort:
         name: Formatting (isort)
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
             - uses: isort/isort-action@v1
     test:
         name: Tests (pytest)
@@ -56,9 +56,9 @@ jobs:
         if: ${{ inputs.pytest }}
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
             - run: pipx install poetry
-            - uses: actions/setup-python@v5
+            - uses: actions/setup-python@v6
               id: setup_python
               with:
                   python-version: ${{ inputs.python_version }}
@@ -66,7 +66,7 @@ jobs:
             - run: poetry install
             - run: poetry run pytest --junitxml=junit/test-results-${{ steps.setup_python.outputs.python-version }}.xml
             - name: upload pytest results
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v7
               with:
                   name: pytest-results-${{ steps.setup_python.outputs.python-version }}
                   path: junit/test-results-${{ steps.setup_python.outputs.python-version }}.xml
@@ -75,9 +75,9 @@ jobs:
         if: ${{ inputs.sphinx }}
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
             - run: pipx install poetry
-            - uses: actions/setup-python@v5
+            - uses: actions/setup-python@v6
               id: setup_python
               with:
                   python-version: ${{ inputs.python_version }}
@@ -87,7 +87,7 @@ jobs:
                   cd docs
                   make html
             - id: deployment
-              uses: actions/upload-pages-artifact@v3
+              uses: actions/upload-pages-artifact@v7
               with:
                   path: docs/_build/html/
     github_pages:
