@@ -19,8 +19,8 @@ jobs:
         name: Types (pyright)
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
-            - uses: actions/setup-python@v5
+            - uses: actions/checkout@v6
+            - uses: actions/setup-python@v6
               id: setup_python
               with:
                   python-version: ${{ inputs.python_version }}
@@ -36,13 +36,13 @@ jobs:
         name: Formatting (black)
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
             - uses: psf/black@stable
     isort:
         name: Formatting (isort)
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
             - uses: isort/isort-action@v1
     test:
         name: Tests (pytest)
@@ -51,8 +51,8 @@ jobs:
         if: ${{ inputs.pytest }}
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
-            - uses: actions/setup-python@v5
+            - uses: actions/checkout@v6
+            - uses: actions/setup-python@v6
               id: setup_python
               with:
                   python-version: ${{ inputs.python_version }}
@@ -63,7 +63,7 @@ jobs:
             - name: run tests
               run: pytest --junitxml=junit/test-results-${{ steps.setup_python.outputs.python-version }}.xml
             - name: upload pytest results
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v7
               with:
                   name: pytest-results-${{ steps.setup_python.outputs.python-version }}
                   path: junit/test-results-${{ steps.setup_python.outputs.python-version }}.xml

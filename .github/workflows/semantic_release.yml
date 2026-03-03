@@ -22,7 +22,7 @@ jobs:
         if: ${{ !inputs.is_production }}
         runs-on: ubuntu-latest
         steps:
-            - uses: amannn/action-semantic-pull-request@v5
+            - uses: amannn/action-semantic-pull-request@v6
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
@@ -52,7 +52,7 @@ jobs:
               with:
                   token: ${{ secrets.GITHUB_TOKEN }}
                   release-type: ${{ inputs.release-type }}
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
             - uses: rickstaa/action-create-tag@v1
               if: ${{ steps.release.outputs.release_created }}
               with:
