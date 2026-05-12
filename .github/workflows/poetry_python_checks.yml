@@ -87,7 +87,7 @@ jobs:
                   cd docs
                   make html
             - id: deployment
-              uses: actions/upload-pages-artifact@v7
+              uses: actions/upload-pages-artifact@v5
               with:
                   path: docs/_build/html/
     github_pages:
